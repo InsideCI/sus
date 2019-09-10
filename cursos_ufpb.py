@@ -3,7 +3,7 @@ from robobrowser import RoboBrowser
 from bs4 import BeautifulSoup as soup
 
 
-def all_courses():
+def ufpb_courses():
     br = RoboBrowser(parser='lxml')
     br.open('https://sigaa.ufpb.br/sigaa/public/curso/lista.jsf?nivel=G&aba=p-ensino')
 
@@ -35,5 +35,4 @@ def all_courses():
     for i in range(0, len(ids)):
         all_courses[i].insert(0, ids[i])
 
-    #print(all_courses)
     return all_courses

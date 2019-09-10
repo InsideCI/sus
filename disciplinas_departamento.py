@@ -2,7 +2,7 @@ import re
 from robobrowser import RoboBrowser
 from bs4 import BeautifulSoup as soup
 
-def classes_and_teachers(nivel, departamento, ano, periodo):
+def classes_and_teachers_dep(nivel, departamento, ano, periodo):
 
     br = RoboBrowser(parser='lxml')
     br.open('https://sigaa.ufpb.br/sigaa/public/turmas/listar.jsf?aba=p-ensino')
@@ -29,9 +29,6 @@ def classes_and_teachers(nivel, departamento, ano, periodo):
     teachers_and_classes = list(each.text.strip().split("\n") for each in raw_data)
     teachers_and_classes[0] = [teachers_and_classes[0][-1]] # Removing useless server data
 
-    for each in teachers_and_classes:
-        # if len(each) != 1:
-        #     print(each)
-        print(each)
+    return teachers_and_classes
 
 
