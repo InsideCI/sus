@@ -21,7 +21,7 @@ def students_by_course(course_id):
     try:
         entry = container.find_all("tr")
     except:
-        print([])
+        return []
 
     students = []
 
