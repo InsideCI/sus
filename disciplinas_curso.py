@@ -20,11 +20,24 @@ def classes_course(course_id, year, period):
     container = page_soup.find("div", {"id":"turmasAbertas"})
     tables = container.find_all("table")
 
+    turmas = []
+
     for table in tables:
-        nome = table.find("td", {"class":"nome"})
-        horario = table.find("td", {"class":"horario"})
+        disciplina = table.find("td", {"class":"subListagem"})
+        disciplina = disciplina.text.strip().split(";")[-1]
+        codigo, disciplina = disciplina.split(" - ")
 
-        print(nome.text.strip().replace("\t", "").replace("\n", ""), horario.text.strip())
+        nomes = table.find_all("td", {"class":"nome"})
+        horarios = table.find_all("td", {"class":"horario"})
 
+        for nome, horario in zip(nomes, horarios):
+            turmas.append([codigo,
+            disciplina.replace("\n", ""),
+            nome.text.strip().replace("\t", "").replace("\n", ""),
+            horario.text.strip()])
+
+
+    for each in turmas:
+        print(each)
 
 classes_course("1626865", "2019", "1")
