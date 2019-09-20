@@ -24,20 +24,21 @@ def classes_course(course_id, year, period):
 
     for table in tables:
         disciplina = table.find("td", {"class":"subListagem"})
-        disciplina = disciplina.text.strip().split(";")[-1]
-        codigo, disciplina = disciplina.split(" - ")
+        disciplina = disciplina.text.strip().split(";")[-1] # Remoção de entulho JS
+        codigo, nome = disciplina.split(" - ") # "CODIGO - DISCIPLINA"
 
-        nomes = table.find_all("td", {"class":"nome"})
+        professores = table.find_all("td", {"class":"nome"})
         horarios = table.find_all("td", {"class":"horario"})
 
-        for nome, horario in zip(nomes, horarios):
-            turmas.append([codigo,
-            disciplina.replace("\n", ""),
-            nome.text.strip().replace("\t", "").replace("\n", ""),
+        # Pode haver mais de uma turma por disciplina;
+        # A iteração abaixo serve para adicionar todas turmas
+        # da mesma disciplina à lista de turmas.
+        for professor, horario in zip(professores, horarios):
+            turmas.append([codigo.replace("\n", ""),
+            nome,
+            professor.text.strip().replace("\t", "").replace("\n", ""),
             horario.text.strip()])
 
 
-    for each in turmas:
-        print(each)
+    return turmas
 
-classes_course("1626865", "2019", "1")
