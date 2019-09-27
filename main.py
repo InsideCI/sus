@@ -19,15 +19,15 @@ from alunos_curso import *
 # ESTUDANTES DE UM CURSO
 # 1626865 - ID DO CURSO DE ENGENHARIA DA COMPUTAÇÃO
 # students = students_by_course('1626865')
-students = students_by_course('1626880')
-for student in students:
-    print(student)
+# students = students_by_course('1626880')
+# for student in students:
+# print(student)
 
 
 # DISCIPLINAS DE UM CURSO
-# disciplinas = classes_course("1626865", "2019", "1")
-# for disciplina in disciplinas:
-#     print(disciplina)
+disciplinas = classes_course("1626865", "2019", "1")
+for disciplina in disciplinas:
+    print(disciplina)
 
 # TODOS OS ESTUDANTES DA UFPB
 # all_students = 0
