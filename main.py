@@ -12,9 +12,9 @@ from alunos_curso import *
 # 1858 - DEPARTAMENTO DE SISTEMAS DE COMPUTAÇÃO
 
 # CURSOS DA UFPB
-# courses = ufpb_courses()
-# for course in courses:
-#     print(course)
+courses = ufpb_courses()
+for course in courses:
+    print(course)
 
 # ESTUDANTES DE UM CURSO
 # 1626865 - ID DO CURSO DE ENGENHARIA DA COMPUTAÇÃO
@@ -25,9 +25,9 @@ from alunos_curso import *
 
 
 # DISCIPLINAS DE UM CURSO
-disciplinas = classes_course("1626865", "2019", "1")
-for disciplina in disciplinas:
-    print(disciplina)
+# disciplinas = classes_course("1626865", "2019", "1")
+# for disciplina in disciplinas:
+#     print(disciplina)
 
 # TODOS OS ESTUDANTES DA UFPB
 # all_students = 0
