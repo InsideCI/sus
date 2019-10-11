@@ -11,15 +11,17 @@ CREATE TABLE departamentos (
         id INT NOT NULL PRIMARY KEY,
         nome VARCHAR (100) NOT NULL,
         id_centro INT NOT NULL,
-        FOREIGN KEY (id_centro) REFERENCES centros (id)
+        FOREIGN KEY (id_centro) REFERENCES centros(id)
 );
 
 CREATE TABLE cursos (
         id INT NOT NULL PRIMARY KEY,
         nome VARCHAR (100) NOT NULL,
+        cidade VARCHAR (100),
+        tipo VARCHAR (100),
         coordenador VARCHAR (100) NOT NULL,
-        id_departamento INT NOT NULL,
-        FOREIGN KEY (id_departamento) REFERENCES departamentos(id)
+        id_centro INT NOT NULL,
+        FOREIGN KEY (id_centro) REFERENCES centros(id)
 );
 
 CREATE TABLE turmas (

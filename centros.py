@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as soup
 
 def centros():
     """
-    centros retorna todos os centros de ensino da ufpb e seus 
+    centros retorna todos os centros de ensino da ufpb e seus
     respectivos id's.
     """
 
@@ -15,12 +15,18 @@ def centros():
     response = requests.get(
         'https://sigaa.ufpb.br/sigaa/public/departamento/lista.jsf', params=params)
 
-    page_soup = soup(response.content, "lxml")
+    if response != None:
 
-    container = page_soup.find("select", {"id": "form:programas"})
+        page_soup = soup(response.content, "lxml")
 
-    options = container.find_all("option")
+        container = page_soup.find("select", {"id": "form:programas"})
 
-    centros = [[centro['value'], centro.text] for centro in options]
+        options = container.find_all("option")
 
-    return centros
+        # centros = [[centro['value'], centro.text] for centro in options]
+        centros = [{"id": int(centro['value']), "nome": centro.text}
+                   for centro in options]
+
+        return centros[1:]
+    else:
+        return []

@@ -108,6 +108,6 @@ venv.bak/
 
 # notebooks
 *.ipynb
-/login
-/sensitive
-gitignore
+
+# sensitive
+database.py

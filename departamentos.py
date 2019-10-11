@@ -26,6 +26,7 @@ def departamentos():
             # capturando o id do centro
             ctr = centro.find("a", {"class", "iconeCentro"})
             ctr = ctr['href'][-4:]
+            # print(ctr)
         except:
             ctr = ''
 
@@ -34,9 +35,21 @@ def departamentos():
             dpt_id = dpt['href'][-4:]  # id do departamento
             if dpt.text.strip() != '':  # ignorando o código mal feito do sigaa
                 if ctr != '':
-                    departamentos.append([dpt_id, dpt.text.strip(), ctr])
+                    # departamentos.append([dpt_id, dpt.text.strip(), ctr])
+                    dp = {
+                        "id": int(dpt_id),
+                        "nome": dpt.text.strip(),
+                        "id_centro": int(ctr)
+                    }
+                    departamentos.append(dp)
+                    print(dp)
                 else:
-                    departamentos.append([dpt_id, dpt.text.strip(), ''])
+                    dp = {
+                        "id": int(dpt_id),
+                        "nome": dpt.text.strip(),
+                        "id_centro": ""
+                    }
+                    departamentos.append(dp)
 
     return departamentos
 
