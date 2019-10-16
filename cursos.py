@@ -1,47 +1,46 @@
 import requests
 from bs4 import BeautifulSoup as soup
-from centros import *
+# from centros import *
 
-ctrs = centros()
-for each in ctrs:
-    print(each)
 
-params = (
-    ('nivel', 'G'),
-    ('aba', 'p-ensino'),
-)
+def cursos(center_id):
+    """
+    cursos returns all courses based on relative to some center.
 
-response = requests.get(
-    'https://sigaa.ufpb.br/sigaa/public/curso/lista.jsf', params=params)
+    params:
+    string center_id -> expects a valid UFPB center ID.
+    """
+    params = (
+        ('lc', 'pt_BR'),
+        ('id', center_id),
+    )
 
-page_soup = soup(response.content, "lxml")
+    response = requests.get(
+        'https://sigaa.ufpb.br/sigaa/public/centro/lista_cursos.jsf', params=params)
 
-listagem = page_soup.find("table", {"class": "listagem"})
+    page_soup = soup(response.content, "lxml")
 
-options = listagem.find_all("tr")
+    try:
+        listagem = page_soup.find("table", {"class": "listagem"})
+    except:
+        return []
 
-centro_local = ""
-centros = []
-for tr in options:
-    options = tr.find_all("td")
+    even = listagem.find_all("tr", {"class": "linhaPar"})
+    odd = listagem.find_all("tr", {"class": "linhaImpar"})
+    entries = even + odd
 
-    centro = {}
-    if len(options) == 1:  # É um centro
-        centro_local = options[0].text.strip()
-        continue  # Guarda o valor do centro, e passa pra o próximo curso
-    if len(options) != 0:
-        centro["id"] = options[-1].find("a")['href'][14:21]
-        centro["nome"] = options[0].text.strip()
-        centro["cidade"] = options[1].text.strip()
-        centro["tipo"] = options[2].text.strip()
-        centro["coordenador"] = options[3].text.strip()
+    courses = []
 
-    print(centro)
+    for course in entries:
+        fields = course.find_all("td")
 
-    # for each in options:
-    #     print(each.text.strip(), end=" ")
+        _, course_id = fields[-1].a['href'].split("id=")
+        city = fields[1].text.strip()
+        name = fields[0].text.strip().replace(" - " + city, "")
+        _type = fields[2].text.strip()
+        coordinator = fields[3].text.strip()
 
-    # link = options[len(options)-1]
-    # print(link.find("a"))
+        courses.append({"id": course_id, "name": name, "city": city, "type": _type,
+                        "coordinator": coordinator, "center_id": center_id})
 
-    # print(" ", centro_local)
+    return courses

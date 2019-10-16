@@ -23,10 +23,17 @@ def centros():
 
         options = container.find_all("option")
 
-        # centros = [[centro['value'], centro.text] for centro in options]
-        centros = [{"id": int(centro['value']), "nome": centro.text}
-                   for centro in options]
+        centers = []
 
-        return centros[1:]
+        for centro in options[1:]:
+            centers.append({"id": centro['value'], "name": centro.text})
+
+        for c in centers:
+            print(c)
+
+        return centers
     else:
         return []
+
+
+centros()

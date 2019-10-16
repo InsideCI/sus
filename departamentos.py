@@ -1,57 +1,33 @@
 import requests
 from bs4 import BeautifulSoup as soup
+# from centros import *
 
 
-def departamentos():
-    """
-    departamentos retorna todos os departamentos de ensino da ufpb e seus 
-    respectivos id's.
-    """
-
+def departamentos(center_id):
     params = (
-        ('aba', 'p-academico'),
+        ('lc', 'pt_BR'),
+        ('id', center_id),
     )
 
     response = requests.get(
-        'https://sigaa.ufpb.br/sigaa/public/centro/lista.jsf', params=params)
+        'https://sigaa.ufpb.br/sigaa/public/centro/lista_departamentos.jsf', params=params)
 
     page_soup = soup(response.content, "lxml")
 
-    centros = page_soup.find_all("table", {"class": "listagem"})
+    try:
+        listagem = page_soup.find("table", {"class": "listagem"})
+    except:
+        return []
 
-    departamentos = []
+    even = listagem.find_all("tr", {"class": "linhaPar"})
+    odd = listagem.find_all("tr", {"class": "linhaImpar"})
+    entries = even + odd
 
-    for centro in centros:
-        try:
-            # capturando o id do centro
-            ctr = centro.find("a", {"class", "iconeCentro"})
-            ctr = ctr['href'][-4:]
-            # print(ctr)
-        except:
-            ctr = ''
+    deps = []
 
-        dpts = centro.find_all("a", {"class": "nomeDepartamento"})
-        for dpt in dpts:
-            dpt_id = dpt['href'][-4:]  # id do departamento
-            if dpt.text.strip() != '':  # ignorando o código mal feito do sigaa
-                if ctr != '':
-                    # departamentos.append([dpt_id, dpt.text.strip(), ctr])
-                    dp = {
-                        "id": int(dpt_id),
-                        "nome": dpt.text.strip(),
-                        "id_centro": int(ctr)
-                    }
-                    departamentos.append(dp)
-                    print(dp)
-                else:
-                    dp = {
-                        "id": int(dpt_id),
-                        "nome": dpt.text.strip(),
-                        "id_centro": ""
-                    }
-                    departamentos.append(dp)
+    for dep in entries:
+        _, name = dep.a.text.strip().split(" - ")
+        _, dep_id = dep.a['href'].split("id=")
+        deps.append({"id": dep_id, "name": name, "center_id": center_id})
 
-    return departamentos
-
-
-# departamentos()
+    return deps
