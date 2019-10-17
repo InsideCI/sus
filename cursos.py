@@ -20,14 +20,14 @@ def cursos(center_id):
 
     page_soup = soup(response.content, "lxml")
 
+    listagem = page_soup.find("table", {"class": "listagem"})
+
     try:
-        listagem = page_soup.find("table", {"class": "listagem"})
+        even = listagem.find_all("tr", {"class": "linhaPar"})
+        odd = listagem.find_all("tr", {"class": "linhaImpar"})
+        entries = even + odd
     except:
         return []
-
-    even = listagem.find_all("tr", {"class": "linhaPar"})
-    odd = listagem.find_all("tr", {"class": "linhaImpar"})
-    entries = even + odd
 
     courses = []
 
@@ -40,7 +40,7 @@ def cursos(center_id):
         _type = fields[2].text.strip()
         coordinator = fields[3].text.strip()
 
-        courses.append({"id": course_id, "name": name, "city": city, "type": _type,
-                        "coordinator": coordinator, "center_id": center_id})
+        courses.append({"id": int(course_id), "nome": name, "cidade": city, "tipo": _type,
+                        "coordenador": coordinator, "id_centro": int(center_id)})
 
     return courses

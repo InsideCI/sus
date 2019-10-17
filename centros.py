@@ -26,14 +26,8 @@ def centros():
         centers = []
 
         for centro in options[1:]:
-            centers.append({"id": centro['value'], "name": centro.text})
-
-        for c in centers:
-            print(c)
+            centers.append({"id": int(centro['value']), "nome": centro.text})
 
         return centers
     else:
         return []
-
-
-centros()

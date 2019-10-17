@@ -14,13 +14,13 @@ def departamentos(center_id):
 
     page_soup = soup(response.content, "lxml")
 
+    listagem = page_soup.find("table", {"class": "listagem"})
     try:
-        listagem = page_soup.find("table", {"class": "listagem"})
+        even = listagem.find_all("tr", {"class": "linhaPar"})
+        odd = listagem.find_all("tr", {"class": "linhaImpar"})
     except:
         return []
 
-    even = listagem.find_all("tr", {"class": "linhaPar"})
-    odd = listagem.find_all("tr", {"class": "linhaImpar"})
     entries = even + odd
 
     deps = []
@@ -28,6 +28,6 @@ def departamentos(center_id):
     for dep in entries:
         _, name = dep.a.text.strip().split(" - ")
         _, dep_id = dep.a['href'].split("id=")
-        deps.append({"id": dep_id, "name": name, "center_id": center_id})
+        deps.append({"id": int(dep_id), "nome": name, "id_centro": center_id})
 
     return deps
