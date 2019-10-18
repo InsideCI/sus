@@ -2,10 +2,12 @@ import re
 from robobrowser import RoboBrowser
 from bs4 import BeautifulSoup as soup
 
-def classes_course(course_id, year, period):
+
+def disciplinas_cursos(course_id, year, period):
 
     br = RoboBrowser(parser='lxml')
-    br.open(f"https://sigaa.ufpb.br/sigaa/public/curso/turmas.jsf?lc=pt_BR&id={course_id}")
+    br.open(
+        f"https://sigaa.ufpb.br/sigaa/public/curso/turmas.jsf?lc=pt_BR&id={course_id}")
 
     form = br.get_form(id='form')
 
@@ -17,28 +19,29 @@ def classes_course(course_id, year, period):
     src = str(br.parsed())
     page_soup = soup(src, "html.parser")
 
-    container = page_soup.find("div", {"id":"turmasAbertas"})
+    container = page_soup.find("div", {"id": "turmasAbertas"})
     tables = container.find_all("table")
 
     turmas = []
 
     for table in tables:
-        disciplina = table.find("td", {"class":"subListagem"})
-        disciplina = disciplina.text.strip().split(";")[-1] # Remoção de entulho JS
-        codigo, nome = disciplina.split(" - ") # "CODIGO - DISCIPLINA"
+        disciplina = table.find("td", {"class": "subListagem"})
+        disciplina = disciplina.text.strip().split(";")[-1]
+        codigo, nome = disciplina.split(" - ")  # "CODIGO - DISCIPLINA"
 
-        professores = table.find_all("td", {"class":"nome"})
-        horarios = table.find_all("td", {"class":"horario"})
+        # EM CADA DISCIPLINA, ENCONTRE TODAS TURMAS
+        tms = table.tbody.find_all("tr")
 
-        # Pode haver mais de uma turma por disciplina;
-        # A iteração abaixo serve para adicionar todas turmas
-        # da mesma disciplina à lista de turmas.
-        for professor, horario in zip(professores, horarios):
-            turmas.append([codigo.replace("\n", ""),
-            nome,
-            professor.text.strip().replace("\t", "").replace("\n", ""),
-            horario.text.strip()])
+        for tm in tms:
+            fields = tm.find_all("td")  # CAMPOS
 
+            turma = fields[1].text.strip()
+            professor = fields[2].text.strip().replace(
+                "\t", "").replace("\n", "")
+            horario = fields[4].text.strip()
+
+            turmas.append({"codigo": codigo, "nome": nome, "turma": turma,
+                           "professor": professor, "horario": horario,
+                           "id_curso": int(course_id)})
 
     return turmas
-
