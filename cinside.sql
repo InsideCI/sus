@@ -25,25 +25,25 @@ CREATE TABLE cursos (
 );
 
 CREATE TABLE turmas (
-        id INT NOT NULL PRIMARY KEY,
+        codigo VARCHAR(10) NOT NULL PRIMARY KEY,
         disciplina VARCHAR (100) NOT NULL,
         turma INT NOT NULL,
         professor VARCHAR (50) NOT NULL,
         horario VARCHAR (10) NOT NULL,
-        sala VARCHAR(10),
+        --sala VARCHAR(10),
         id_curso INT NOT NULL,
         FOREIGN KEY (id_curso) REFERENCES cursos(id)
 );
 
 CREATE TABLE alunos (
-        matricula VARCHAR(20) NOT NULL PRIMARY KEY,
+        matricula BIGINT NOT NULL PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         id_curso INT NOT NULL,
         FOREIGN KEY (id_curso) REFERENCES cursos(id)
 );
 
 CREATE TABLE professores (
-        id VARCHAR(20) NOT NULL PRIMARY KEY,
+        id INT NOT NULL PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         grau VARCHAR(20) NOT NULL,
         id_departamento INT NOT NULL,
