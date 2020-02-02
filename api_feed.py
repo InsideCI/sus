@@ -1,27 +1,22 @@
-from centros import *
-from departamentos import *
-from cursos import *
-from alunos_curso import *
-from disciplinas_curso import *
-from disciplinas_departamento import *
+from scrappers.centros import *
+from scrappers.departamentos import *
+from scrappers.cursos import *
+from scrappers.alunos_curso import *
 
-import requests
-import json
+from utils.API import API
 
-from database_update import API
-
-api = API("http://localhost:8081")
+api = API("http://192.168.1.200:8081")
 
 # CENTROS
 cts = centros()
-api.post(cts, "/centers")
+# api.post(cts, "/centers")
 
 
 # DEPARTAMENTOS
 for centro in cts:
     deps = departamentos(centro['id'])
 
-    api.post(deps, "/departments")
+    # api.post(deps, "/departments")
 
 
 # CURSOS
@@ -31,7 +26,7 @@ for centro in cts:
     for c in crs:
         todos_cursos.append(c)
 
-    api.post(crs, "/courses")
+    # api.post(crs, "/courses")
 
 
 # ALUNOS

@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 CREATE DATABASE sigaa_ufpb;
 
 \c sigaa_ufpb;
