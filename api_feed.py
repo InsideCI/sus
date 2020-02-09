@@ -14,7 +14,7 @@ cts = centros()
 
 # DEPARTAMENTOS
 for centro in cts:
-    deps = departamentos(centro['id'])
+    deps = departamentosByCentro(centro['id'])
 
     # api.post(deps, "/departments")
 
@@ -22,7 +22,7 @@ for centro in cts:
 # CURSOS
 todos_cursos = []
 for centro in cts:
-    crs = cursos(centro['id'])
+    crs = cursosByCentro(centro['id'])
     for c in crs:
         todos_cursos.append(c)
 
@@ -32,7 +32,7 @@ for centro in cts:
 # ALUNOS
 qtd_alunos = 0
 for curso in todos_cursos:
-    alunos = alunos_curso(curso['id'])
+    alunos = alunosByCurso(curso['id'])
 
     api.post(alunos, "/students")
 

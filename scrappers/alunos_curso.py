@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup as soup
 
 
-def alunos_curso(course_id):
+def alunosByCurso(course_id):
     """
     alunos_curso retorna todos os alunos matriculados em um dado curso;
 
@@ -35,6 +35,6 @@ def alunos_curso(course_id):
             name = raw[1].text
 
             students.append({"matricula": int(registration),
-                             "nome": name, "id_curso": int(course_id)})
+                             "nome": name, "idCurso": int(course_id)})
 
     return students

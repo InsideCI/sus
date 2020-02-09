@@ -3,7 +3,7 @@ from robobrowser import RoboBrowser
 from bs4 import BeautifulSoup as soup
 
 
-def disciplinas_cursos(course_id, year, period):
+def disciplinasByCurso(course_id, year, period):
 
     br = RoboBrowser(parser='lxml')
     br.open(
@@ -40,8 +40,8 @@ def disciplinas_cursos(course_id, year, period):
                 "\t", "").replace("\n", "")
             horario = fields[4].text.strip()
 
-            turmas.append({"codigo": codigo, "nome": nome, "turma": turma,
+            turmas.append({"id": codigo, "nome": nome, "turma": turma,
                            "professor": professor, "horario": horario,
-                           "id_curso": int(course_id)})
+                           "idCurso": int(course_id)})
 
     return turmas

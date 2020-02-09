@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as soup
 # from centros import *
 
 
-def cursos(center_id):
+def cursosByCentro(center_id):
     """
     cursos returns all courses based on relative to some center.
 
@@ -41,6 +41,6 @@ def cursos(center_id):
         coordinator = fields[3].text.strip()
 
         courses.append({"id": int(course_id), "nome": name, "cidade": city, "tipo": _type,
-                        "coordenador": coordinator, "id_centro": int(center_id)})
+                        "coordenador": coordinator, "idCentro": int(center_id)})
 
     return courses

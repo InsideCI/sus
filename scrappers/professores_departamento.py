@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup as soup
 
 
-def professores_departamento(id_departamento):
+def professoresByDepartamento(id_departamento):
 
     params = (
         ('id', id_departamento),
@@ -35,6 +35,6 @@ def professores_departamento(id_departamento):
         _, _id = prof.find("span", {"class": "pagina"}).a['href'].split("=")
 
         profs.append({"id": int(_id), "nome": nome, "grau": grau,
-                      "id_departamento": int(id_departamento)})
+                      "idDepartamento": int(id_departamento)})
 
     return profs
