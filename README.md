@@ -6,3 +6,12 @@ Feel free to use and discover new statistics :)
 
 ### DISCLAIMER
 SUS was created for learning purposes only and it will not guarantee a futureproof usage experience as SIGAA website is not OPEN REST friendly.
+
+### BEFORE RUNNING:
+
+`pip+{version} install robobrowser`
+`pip+{version} install requests`
+`pip+{version} install lxml`
+
+Then, you cant list any implemented entity by uncommenting from `list_entities.py` file, or you can use included API class to feed any API.
+
