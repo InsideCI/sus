@@ -23,9 +23,9 @@ PERIODO = "2"
 #     print(departamento)
 
 ## PROFESSORES
-# professores = professoresByDepartamento(ID_DEPARTAMENTOINFORMATICA)
-# for professor in professores:
-#     print(professor)
+professores = professoresByDepartamento(1617)
+for professor in professores:
+    print(professor)
 
 ## CURSOS
 # courses = cursosByCentro(ID_CENTROINFORMATICA)
@@ -38,6 +38,6 @@ PERIODO = "2"
 #     print(student)
 
 ## DISCIPLINAS
-disciplinas = disciplinasByCurso(ID_ENGENHARIA, ANO, PERIODO)
-for disciplina in disciplinas:
-    print(disciplina)
+# disciplinas = disciplinasByCurso(ID_ENGENHARIA, ANO, PERIODO)
+# for disciplina in disciplinas:
+#     print(disciplina)

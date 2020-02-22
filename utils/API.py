@@ -8,7 +8,5 @@ class API:
 
     def post(self, body, endpoint):
         if len(body) != 0:
-            for element in body:
-                data = json.dumps(element, ensure_ascii=False).encode('utf-8')
-                print(data)
-                requests.post(self.address + endpoint, data=data)
+            data = json.dumps(body, ensure_ascii=False).encode('utf-8')
+            requests.post(self.address + endpoint, data=data)

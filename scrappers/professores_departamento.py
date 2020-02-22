@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup as soup
 
 
 def professoresByDepartamento(id_departamento):
-
     params = (
         ('id', id_departamento),
     )
@@ -20,17 +19,16 @@ def professoresByDepartamento(id_departamento):
     profs = []
 
     for prof in professores:
-        fields = prof.find_all("span")
-
-        nome, grau = prof.find(
-            "span", {"class": "nome"}).text.strip().split("(")
-        nome = nome.strip()
-        grau = grau[:-1]
-
         try:
-            lattes = prof.find("span", {"class": "enderecoLattes"}).a['href']
-        except:
-            lattes = ''
+            nome, grau = prof.find(
+                "span", {"class": "nome"}).text.strip().split("(")
+            grau = grau[:-1]
+        except ValueError:
+            nome = prof.find(
+                "span", {"class": "nome"}).text.strip()
+            grau = ''
+
+        nome = nome.strip()
 
         _, _id = prof.find("span", {"class": "pagina"}).a['href'].split("=")
 
