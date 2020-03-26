@@ -40,7 +40,7 @@ def cursosByCentro(center_id):
         _type = fields[2].text.strip()
         coordinator = fields[3].text.strip()
 
-        courses.append({"id": int(course_id), "nome": name, "cidade": city, "tipo": _type,
+        courses.append({"id": int(course_id), "nome": name, "local": city, "tipo": _type,
                         "coordenador": coordinator, "idCentro": int(center_id)})
 
     return courses

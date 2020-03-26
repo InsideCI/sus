@@ -14,30 +14,28 @@ cts = centros()
 # api.post(cts, "/centers")
 
 # DEPARTAMENTOS
-departments = []
-for centro in cts:
-    deps = departamentosByCentro(centro['id'])
-    for dep in deps:
-        print(dep)
-        departments.append(dep)
+# departments = []
+# for centro in cts:
+#     deps = departamentosByCentro(centro['id'])
+#     for dep in deps:
+#         print(dep)
+#         departments.append(dep)
     # api.post(deps, "/departments")
 
 # PROFESSORES
-for dep in departments:
-    teachers = professoresByDepartamento(dep['id'])
-    print(dep['nome'])
-    for teacher in teachers:
-        print(teacher['nome'])
-        api.post(teacher, "/teachers")
+# for dep in departments:
+#     teachers = professoresByDepartamento(dep['id'])
+#     for teacher in teachers:
+#         api.post(teacher, "/teachers")
 
 # CURSOS
-# todos_cursos = []
-# for centro in cts:
-#     crs = cursosByCentro(centro['id'])
-#     for c in crs:
-#         todos_cursos.append(c)
+todos_cursos = []
+for centro in cts:
+    crs = cursosByCentro(centro['id'])
+    for c in crs:
+        # todos_cursos.append(c)
 
-# api.post(crs, "/courses")
+        api.post(c, "/courses")
 
 # ALUNOS
 # qtd_alunos = 0
