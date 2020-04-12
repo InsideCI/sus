@@ -9,9 +9,7 @@ SUS was created for learning purposes only and it will not guarantee a futurepro
 
 ### BEFORE RUNNING:
 
-`pip+{version} install robobrowser`
-`pip+{version} install requests`
-`pip+{version} install lxml`
+`pip install -r requirements.txt`
 
 Then, you cant list any implemented entity by uncommenting from `list_entities.py` file, or you can use included API class to feed any API.
 
