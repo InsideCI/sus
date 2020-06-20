@@ -3,43 +3,54 @@ from scrappers.departamentos import *
 from scrappers.cursos import *
 from scrappers.alunos_curso import *
 from scrappers.professores_departamento import *
+from scrappers.disciplinas_curso import disciplinasByCurso
 
 from utils.API import API
 
-API_ADDRESS = "http://localhost:8080"
+API_ADDRESS = "https://cinside.ddns.net:8081"
 api = API(API_ADDRESS)
 
 # CENTROS
+print("Getting centers")
 cts = centros()
-# api.post(cts, "/centers")
+# for ct in cts:
+#     api.post(ct, "/centers")
 
-# DEPARTAMENTOS
+# # DEPARTAMENTOS
+# print("Getting departments")
 # departments = []
 # for centro in cts:
 #     deps = departamentosByCentro(centro['id'])
 #     for dep in deps:
-#         print(dep)
 #         departments.append(dep)
-    # api.post(deps, "/departments")
+#         api.post(dep, "/departments")
 
-# PROFESSORES
+# # PROFESSORES
+# print("Getting teachers")
 # for dep in departments:
 #     teachers = professoresByDepartamento(dep['id'])
 #     for teacher in teachers:
 #         api.post(teacher, "/teachers")
 
-# CURSOS
-todos_cursos = []
+# # CURSOS
+print("Getting courses")
+courses = []
 for centro in cts:
     crs = cursosByCentro(centro['id'])
     for c in crs:
-        # todos_cursos.append(c)
+        courses.append(c)
+#         # api.post(c, "/courses")
 
-        api.post(c, "/courses")
+# # # ALUNOS
+# print("Getting students")
+# for course in courses:
+#     alunos = alunosByCurso(course['id'])
+#     for aluno in alunos:
+#         api.post(aluno, "/students")
 
-# ALUNOS
-# qtd_alunos = 0
-# for curso in todos_cursos:
-#     alunos = alunosByCurso(curso['id'])
 
-# api.post(alunos, "/students")
+print("Getting classes")
+for course in courses:
+    disciplinas = disciplinasByCurso(course['id'], "2019", "2")
+    for disciplina in disciplinas:
+        api.post(disciplina, "/classes")

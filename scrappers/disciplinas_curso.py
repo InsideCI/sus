@@ -27,7 +27,7 @@ def disciplinasByCurso(course_id, year, period):
     for table in tables:
         disciplina = table.find("td", {"class": "subListagem"})
         disciplina = disciplina.text.strip().split(";")[-1]
-        codigo, nome = disciplina.split(" - ")  # "CODIGO - DISCIPLINA"
+        codigo, nome = disciplina.split(" - ")[:2]  # "CODIGO - DISCIPLINA"
 
         # EM CADA DISCIPLINA, ENCONTRE TODAS TURMAS
         tms = table.tbody.find_all("tr")

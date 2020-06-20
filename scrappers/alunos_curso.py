@@ -34,7 +34,7 @@ def alunosByCurso(course_id):
             registration = raw[0].text
             name = raw[1].text
 
-            students.append({"matricula": int(registration),
+            students.append({"id": int(registration),
                              "nome": name, "idCurso": int(course_id)})
 
     return students

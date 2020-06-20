@@ -12,32 +12,32 @@ ID_DEPARTAMENTOINFORMATICA = "2151"
 ANO = "2019"
 PERIODO = "2"
 
-## CENTROS
+# CENTROS
 # centers = centros()
 # for center in centers:
 #     print(center)
 
-## DEPARTAMENTOS
+# DEPARTAMENTOS
 # departamentos = departamentosByCentro(ID_CENTROINFORMATICA)
 # for departamento in departamentos:
 #     print(departamento)
 
-## PROFESSORES
-professores = professoresByDepartamento(1617)
-for professor in professores:
-    print(professor)
+# PROFESSORES
+# professores = professoresByDepartamento(1617)
+# for professor in professores:
+#     print(professor)
 
-## CURSOS
+# CURSOS
 # courses = cursosByCentro(ID_CENTROINFORMATICA)
 # for course in courses:
 #     print(course)
 
-## ALUNOS
+# ALUNOS
 # students = alunosByCurso(ID_ENGENHARIA)
 # for student in students:
 #     print(student)
 
-## DISCIPLINAS
-# disciplinas = disciplinasByCurso(ID_ENGENHARIA, ANO, PERIODO)
-# for disciplina in disciplinas:
-#     print(disciplina)
+# DISCIPLINAS
+disciplinas = disciplinasByCurso(ID_ENGENHARIA, ANO, PERIODO)
+for disciplina in disciplinas:
+    print(disciplina)
